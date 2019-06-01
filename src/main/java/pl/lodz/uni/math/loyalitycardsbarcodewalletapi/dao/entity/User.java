@@ -1,7 +1,12 @@
 package pl.lodz.uni.math.loyalitycardsbarcodewalletapi.dao.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public final class User {
@@ -21,7 +26,6 @@ public final class User {
         this.active = active;
     }
 
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +38,10 @@ public final class User {
     }
 
     @Basic
-    @Column(name = "login")
+    @NotBlank
+    @Column(name = "login", length = 35, nullable = false, unique = true)
+    @Size(max = 35)
+    @NotNull
     public String getLogin() {
         return login;
     }
@@ -44,7 +51,9 @@ public final class User {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", length = 64, nullable = false)
+    @Size(max = 64)
+    @NotNull
     public String getPassword() {
         return password;
     }
@@ -54,7 +63,7 @@ public final class User {
     }
 
     @Basic
-    @Column(name = "date_time_of_last_password_change")
+    @Column(name = "date_time_of_last_password_change", nullable = false)
     public Timestamp getDateTimeOfLastPasswordChange() {
         return dateTimeOfLastPasswordChange;
     }
@@ -72,4 +81,7 @@ public final class User {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards = new ArrayList<>();
 }

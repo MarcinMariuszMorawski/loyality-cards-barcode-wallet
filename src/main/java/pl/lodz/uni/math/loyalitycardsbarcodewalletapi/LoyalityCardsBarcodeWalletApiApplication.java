@@ -19,10 +19,13 @@ public class LoyalityCardsBarcodeWalletApiApplication {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new JwtResourcesFilter());
         filterRegistrationBean.addUrlPatterns(
-                "/api/magazynierzy",
-                "/api/magazynierzy/*",
-                "/api/administrator",
-                "/api/administrator/*");
+                "/api/card",
+                "/api/card/*",
+                "/api/user",
+                "/api/user/*",
+                "/api/brand",
+                "/api/brand/*",
+                "/api/application/changepassword");
         return filterRegistrationBean;
     }
 

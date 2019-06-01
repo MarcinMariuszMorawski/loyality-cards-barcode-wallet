@@ -1,6 +1,9 @@
 package pl.lodz.uni.math.loyalitycardsbarcodewalletapi.dao.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public final class Brand {
@@ -28,7 +31,8 @@ public final class Brand {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", length = 35, nullable = false)
+    @Size(max = 35)
     public String getName() {
         return name;
     }
@@ -38,7 +42,8 @@ public final class Brand {
     }
 
     @Basic
-    @Column(name = "color")
+    @Column(name = "color", length = 7, nullable = false)
+    @Size(max = 7)
     public String getColor() {
         return color;
     }
@@ -46,4 +51,8 @@ public final class Brand {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Card> cards = new ArrayList<>();
+
 }

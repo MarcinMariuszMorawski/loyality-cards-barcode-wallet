@@ -49,7 +49,7 @@ public final class JwtResourcesFilter implements Filter {
                     }
 
                 } catch (Exception e) {
-                    throw new ServletException("Błąd przy walidacji tokena");
+                    throw new ServletException(e.getMessage());
                 }
             }
             filterChain.doFilter(servletRequest, servletResponse);

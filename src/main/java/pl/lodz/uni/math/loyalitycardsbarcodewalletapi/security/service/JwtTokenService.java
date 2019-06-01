@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.dao.entity.User;
 
@@ -95,5 +96,13 @@ public final class JwtTokenService implements Serializable {
 
     private Date calculateExpirationDate(Date createdDate) {
         return new Date(createdDate.getTime() + expiration * 1000);
+    }
+
+    public String getTokenFromHeader(HttpHeaders headers) {
+        String token = headers.getFirst("authorization");
+        if (token == null) {
+            return null;
+        }
+        return token.substring(6);
     }
 }
