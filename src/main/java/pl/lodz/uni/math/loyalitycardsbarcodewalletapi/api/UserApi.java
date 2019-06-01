@@ -44,7 +44,6 @@ public final class UserApi {
 
     @PutMapping("/changepassword")
     public ResponseEntity<?> changePassword(@RequestBody JwtUserChangePassword jwtUserChangePassword, @RequestHeader HttpHeaders headers) {
-
         userManager.changePassword(jwtUserChangePassword, headers);
 
         HashMap<String, Object> json = new LinkedHashMap<>();

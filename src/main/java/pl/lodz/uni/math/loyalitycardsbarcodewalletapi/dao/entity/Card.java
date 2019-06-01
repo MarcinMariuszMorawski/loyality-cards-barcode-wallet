@@ -61,7 +61,7 @@ public final class Card {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_brand")
-    @JsonIgnore
+    //@JsonIgnore
 
     public Brand getBrand() {
         return brand;

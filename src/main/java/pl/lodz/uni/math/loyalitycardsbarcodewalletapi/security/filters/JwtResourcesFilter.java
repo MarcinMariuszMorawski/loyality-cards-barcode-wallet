@@ -32,20 +32,20 @@ public final class JwtResourcesFilter implements Filter {
             String header = httpServletRequest.getHeader("authorization");
 
             if (!header.startsWith("Bearer ")) {
-                throw new ServletException("Niepoprawny nagłowek");
+                throw new ServletException("Wrong authorization header");
             } else {
                 try {
                     String token = header.substring(7);
                     String username = jwtTokenService.getUsernameFromToken(token);
 
                     if (!userManager.findByLogin(username).isPresent()) {
-                        throw new ServletException("Błąd zapytania");
+                        throw new ServletException("Request error");
                     }
 
                     User user = userManager.findByLogin(username).get();
 
                     if (!jwtTokenService.validateUserToken(token, user)) {
-                        throw new ServletException("Niewłasciwy token");
+                        throw new ServletException("Wrong token");
                     }
 
                 } catch (Exception e) {
@@ -54,7 +54,7 @@ public final class JwtResourcesFilter implements Filter {
             }
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (NullPointerException e) {
-            throw new ServletException("Pusty nagłówek");
+            throw new ServletException("Empty authorization header");
         }
     }
 }

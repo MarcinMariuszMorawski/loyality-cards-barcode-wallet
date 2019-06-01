@@ -46,7 +46,7 @@ public final class UserManager {
 
         String login = jwtTokenService.getUsernameFromToken(token);
 
-        if (findByLogin(login).isPresent()) {
+        if (!findByLogin(login).isPresent()) {
             throw new BadRequestException("Token validate error");
         }
 
