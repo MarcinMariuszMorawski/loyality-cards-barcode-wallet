@@ -21,11 +21,9 @@ public class LoyalityCardsBarcodeWalletApiApplication {
         filterRegistrationBean.addUrlPatterns(
                 "/api/card",
                 "/api/card/*",
-                "/api/user",
-                "/api/user/*",
                 "/api/brand",
                 "/api/brand/*",
-                "/api/application/changepassword");
+                "/api/user/changepassword");
         return filterRegistrationBean;
     }
 
