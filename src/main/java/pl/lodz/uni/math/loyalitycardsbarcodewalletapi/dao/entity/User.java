@@ -39,9 +39,9 @@ public final class User {
 
     @Basic
     @NotBlank
-    @Column(name = "login", length = 35, nullable = false, unique = true)
-    @Size(max = 35)
     @NotNull
+    @Size(max = 35)
+    @Column(name = "login", length = 35, nullable = false, unique = true)
     public String getLogin() {
         return login;
     }
@@ -51,9 +51,10 @@ public final class User {
     }
 
     @Basic
-    @Column(name = "password", length = 64, nullable = false)
-    @Size(max = 64)
+    @NotBlank
     @NotNull
+    @Size(max = 64)
+    @Column(name = "password", length = 64, nullable = false)
     public String getPassword() {
         return password;
     }
@@ -63,6 +64,7 @@ public final class User {
     }
 
     @Basic
+    @NotNull
     @Column(name = "date_time_of_last_password_change", nullable = false)
     public Timestamp getDateTimeOfLastPasswordChange() {
         return dateTimeOfLastPasswordChange;
@@ -73,7 +75,8 @@ public final class User {
     }
 
     @Basic
-    @Column(name = "active")
+    @NotNull
+    @Column(name = "active", nullable = false)
     public Boolean getActive() {
         return active;
     }
@@ -84,4 +87,16 @@ public final class User {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Card> cards = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", dateTimeOfLastPasswordChange=" + dateTimeOfLastPasswordChange +
+                ", active=" + active +
+                ", cards=" + cards +
+                '}';
+    }
 }

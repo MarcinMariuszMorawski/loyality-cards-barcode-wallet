@@ -39,4 +39,5 @@ public final class CardManager {
     public void deleteById(Long id) {
         cardRepo.deleteById(id);
     }
+
 }

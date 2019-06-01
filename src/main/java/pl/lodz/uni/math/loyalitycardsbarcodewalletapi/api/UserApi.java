@@ -18,7 +18,7 @@ public final class UserApi {
     }
 
     @PutMapping("/changepassword")
-    public ResponseEntity<?> changePassword(@RequestParam JwtUserChangePassword jwtUserChangePassword, @RequestHeader HttpHeaders headers) {
+    public ResponseEntity<?> changePassword(@RequestBody JwtUserChangePassword jwtUserChangePassword, @RequestHeader HttpHeaders headers) {
         return Responses.wrongRequest();
     }
 }
