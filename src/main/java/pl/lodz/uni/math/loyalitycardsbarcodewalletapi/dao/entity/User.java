@@ -1,6 +1,7 @@
 package pl.lodz.uni.math.loyalitycardsbarcodewalletapi.dao.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 public final class User {
     private Long id;
-    private String login;
+    private String email;
     private String password;
     private Timestamp dateTimeOfLastPasswordChange;
     private Boolean active;
@@ -19,8 +20,8 @@ public final class User {
     public User() {
     }
 
-    public User(String login, String password, Timestamp dateTimeOfLastPasswordChange, Boolean active) {
-        this.login = login;
+    public User(String email, String password, Timestamp dateTimeOfLastPasswordChange, Boolean active) {
+        this.email = email;
         this.password = password;
         this.dateTimeOfLastPasswordChange = dateTimeOfLastPasswordChange;
         this.active = active;
@@ -40,14 +41,15 @@ public final class User {
     @Basic
     @NotBlank
     @NotNull
+    @Email
     @Size(max = 35)
-    @Column(name = "login", length = 35, nullable = false, unique = true)
-    public String getLogin() {
-        return login;
+    @Column(name = "email", length = 35, nullable = false, unique = true)
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Basic
@@ -92,7 +94,7 @@ public final class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", dateTimeOfLastPasswordChange=" + dateTimeOfLastPasswordChange +
                 ", active=" + active +

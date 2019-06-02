@@ -27,7 +27,7 @@ public final class JwtTokenService implements Serializable {
     @Value("${jwt.expiration}")
     private Long expiration;
 
-    public String getUsernameFromToken(String token) {
+    public String getEmailFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
@@ -66,7 +66,7 @@ public final class JwtTokenService implements Serializable {
 
     public String generateUserToken(JwtUser userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getLogin(), "user");
+        return doGenerateToken(claims, userDetails.getEmail(), "user");
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject, String resource) {
@@ -84,13 +84,14 @@ public final class JwtTokenService implements Serializable {
     }
 
     public Boolean validateUserToken(String token, User user) {
-        final String username = getUsernameFromToken(token);
+        final String email = getEmailFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
         return (
-                username.equals(user.getLogin())
+                email.equals(user.getEmail())
                         && getResourceFromToken(token).equals("user")
                         && !isTokenExpired(token)
                         && !isCreatedBeforeLastPasswordReset(created, user.getDateTimeOfLastPasswordChange())
+                        && user.getActive()
         );
     }
 
@@ -98,9 +99,9 @@ public final class JwtTokenService implements Serializable {
         return new Date(createdDate.getTime() + expiration * 1000);
     }
 
-    public String getTokenFromHeader(HttpHeaders headers) {
+    public String getTokenFromHeaders(HttpHeaders headers) {
         String token = headers.getFirst("authorization");
-        if (token == null) {
+        if (token == null || token.length() < 10) {
             return null;
         }
         return token.substring(6);

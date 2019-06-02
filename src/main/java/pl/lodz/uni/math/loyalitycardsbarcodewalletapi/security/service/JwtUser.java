@@ -4,23 +4,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 public final class JwtUser {
-    private String login;
+    private String email;
     private String password;
 
     public JwtUser() {
     }
 
-    public JwtUser(String login, String password) {
-        this.login = login;
+    public JwtUser(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

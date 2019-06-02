@@ -55,7 +55,7 @@ public final class CardManager {
         }
 
         if (!brandManager.findById(brandId).isPresent()) {
-            throw new BadRequestException("Token validate error");
+            throw new BadRequestException("Invalid brand");
         }
 
         card.setBrand(brandManager.findById(brandId).get());
@@ -76,13 +76,13 @@ public final class CardManager {
         User user = userManager.findByHeaders(headers).get();
 
         if (!findById(id).isPresent()) {
-            throw new BadRequestException("Wrong brand id parameter");
+            throw new BadRequestException("Wrong card id parameter");
         }
 
         Card card = findById(id).get();
 
         if (!card.getUser().getId().equals(user.getId())) {
-            throw new BadRequestException("You can not delete this card. It not belongs to you.");
+            throw new BadRequestException("You can not delete this card. It not belongs to you");
         }
         deleteById(id);
     }

@@ -11,6 +11,7 @@ import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.api.exceptions.BadRequestE
 import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.dao.UserRepo;
 import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.dao.entity.User;
 import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.security.service.JwtTokenService;
+import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.security.service.JwtUser;
 import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.security.service.JwtUserChangePassword;
 
 import java.sql.Timestamp;
@@ -32,25 +33,25 @@ public final class UserManager {
         return userRepo.findById(id);
     }
 
-    public Optional<User> findByLogin(String login) {
-        return userRepo.findByLogin(login);
+    public Optional<User> findByEmail(String email) {
+        return userRepo.findByEmail(email);
     }
 
     public Optional<User> findByHeaders(HttpHeaders headers) {
 
-        String token = jwtTokenService.getTokenFromHeader(headers);
+        String token = jwtTokenService.getTokenFromHeaders(headers);
 
         if (token == null) {
             throw new BadRequestException("Token validate error");
         }
 
-        String login = jwtTokenService.getUsernameFromToken(token);
+        String email = jwtTokenService.getEmailFromToken(token);
 
-        if (!findByLogin(login).isPresent()) {
+        if (!findByEmail(email).isPresent()) {
             throw new BadRequestException("Token validate error");
         }
 
-        return findByLogin(login);
+        return findByEmail(email);
     }
 
     public Iterable<User> findAll() {
@@ -58,12 +59,25 @@ public final class UserManager {
     }
 
     public User save(User user) {
-        user.setLogin(StringUtils.uncapitalize(user.getLogin()));
+        user.setEmail(StringUtils.uncapitalize(user.getEmail()));
         return userRepo.save(user);
     }
 
     public void deleteById(Long id) {
         userRepo.deleteById(id);
+    }
+
+    public void createAccount(JwtUser jwtUser) {
+        if (jwtUser.getPassword().length() != 64) {
+            throw new BadRequestException("Wrong new password");
+        }
+
+        if (findByEmail(jwtUser.getEmail()).isPresent()) {
+            throw new BadRequestException("Email already used");
+        }
+
+        User user = new User(jwtUser.getEmail(), jwtUser.getPassword(), new Timestamp(System.currentTimeMillis()), true);
+        save(user);
     }
 
     public void changePassword(JwtUserChangePassword jwtUserChangePassword, HttpHeaders headers) {
@@ -83,6 +97,7 @@ public final class UserManager {
         }
 
         user.setPassword(jwtUserChangePassword.getNewPassword());
+        user.setDateTimeOfLastPasswordChange(new Timestamp(System.currentTimeMillis()));
 
         save(user);
     }
@@ -91,6 +106,4 @@ public final class UserManager {
     public void fill() {
         save(new User("1", "1", Timestamp.valueOf(LocalDateTime.now()), true));
     }
-
-
 }

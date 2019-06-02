@@ -16,9 +16,9 @@ public final class JwtAuthenticationServer implements Serializable {
 
     public String validateUserCredentials(JwtUser jwtUser) {
 
-        if (userManager.findByLogin(jwtUser.getLogin()).isPresent()) {
+        if (userManager.findByEmail(jwtUser.getEmail()).isPresent()) {
 
-            User user = userManager.findByLogin(jwtUser.getLogin()).get();
+            User user = userManager.findByEmail(jwtUser.getEmail()).get();
 
             if (user.getPassword().equals(jwtUser.getPassword()) && user.getActive()) {
                 return jwtTokenService.generateUserToken(jwtUser);

@@ -39,7 +39,15 @@ public final class UserApi {
         json.put("message", "Token has been generated");
         json.put("token", token);
         return new ResponseEntity<>(json, HttpStatus.OK);
+    }
 
+    @PostMapping("/createaccount")
+    public ResponseEntity<?> createAccount(@RequestBody JwtUser jwtUser) {
+        userManager.createAccount(jwtUser);
+
+        HashMap<String, Object> json = new LinkedHashMap<>();
+        json.put("message", "Account has been created");
+        return new ResponseEntity<>(json, HttpStatus.OK);
     }
 
     @PutMapping("/changepassword")

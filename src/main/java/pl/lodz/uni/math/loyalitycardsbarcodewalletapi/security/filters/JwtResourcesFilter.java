@@ -34,22 +34,17 @@ public final class JwtResourcesFilter implements Filter {
             if (!header.startsWith("Bearer ")) {
                 throw new ServletException("Wrong authorization header");
             } else {
-                try {
-                    String token = header.substring(7);
-                    String username = jwtTokenService.getUsernameFromToken(token);
+                String token = header.substring(7);
+                String username = jwtTokenService.getEmailFromToken(token);
 
-                    if (!userManager.findByLogin(username).isPresent()) {
-                        throw new ServletException("Request error");
-                    }
+                if (!userManager.findByEmail(username).isPresent()) {
+                    throw new ServletException("Request error");
+                }
 
-                    User user = userManager.findByLogin(username).get();
+                User user = userManager.findByEmail(username).get();
 
-                    if (!jwtTokenService.validateUserToken(token, user)) {
-                        throw new ServletException("Wrong token");
-                    }
-
-                } catch (Exception e) {
-                    throw new ServletException(e.getMessage());
+                if (!jwtTokenService.validateUserToken(token, user)) {
+                    throw new ServletException("Wrong token");
                 }
             }
             filterChain.doFilter(servletRequest, servletResponse);
