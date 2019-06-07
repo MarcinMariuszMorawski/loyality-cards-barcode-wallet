@@ -15,7 +15,7 @@ public class LoyalityCardsBarcodeWalletApiApplication {
     }
 
     @Bean
-    public FilterRegistrationBean filterRegistrationBeanPanelAdministratora() {
+    public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new JwtResourcesFilter());
         filterRegistrationBean.addUrlPatterns(
