@@ -44,7 +44,7 @@ public final class BrandManager {
         save(new Brand("Vitay", "#421356"));
         save(new Brand("Payback", "#421356"));
         save(new Brand("Empik", "#421356"));
-        save(new Brand("ClrcleK", "#421356"));
+        save(new Brand("CircleK", "#421356"));
         save(new Brand("Zabka", "#421356"));
         save(new Brand("Mcdonalds", "#421356"));
         save(new Brand("Kfc", "#421356"));
