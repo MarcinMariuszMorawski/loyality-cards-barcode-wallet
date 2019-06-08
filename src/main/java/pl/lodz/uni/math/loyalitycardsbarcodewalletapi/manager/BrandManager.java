@@ -36,7 +36,28 @@ public final class BrandManager {
 
     @EventListener(ApplicationReadyEvent.class)
     public void fill() {
-        save(new Brand("1", "1"));
+        save(new Brand("Biedronka", "#123563"));
+        save(new Brand("Tesco", "#421356"));
+        save(new Brand("Auchan", "#421356"));
+        save(new Brand("Stokrotka", "#421356"));
+        save(new Brand("Dino", "#421356"));
+        save(new Brand("Vitay", "#421356"));
+        save(new Brand("Payback", "#421356"));
+        save(new Brand("Empik", "#421356"));
+        save(new Brand("ClrcleK", "#421356"));
+        save(new Brand("Zabka", "#421356"));
+        save(new Brand("Mcdonalds", "#421356"));
+        save(new Brand("Kfc", "#421356"));
+        save(new Brand("Tokyo", "#421356"));
+        save(new Brand("Smyk", "#421356"));
+        save(new Brand("Deichman", "#421356"));
+        save(new Brand("CCC", "#421356"));
+        save(new Brand("Cropp", "#421356"));
+        save(new Brand("House", "#421356"));
+        save(new Brand("H&M", "#421356"));
+        save(new Brand("Sinsay", "#421356"));
+        save(new Brand("Rossmann", "#421356"));
+        save(new Brand("Kasztan", "#421356"));
     }
 
 

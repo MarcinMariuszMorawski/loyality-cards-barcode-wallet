@@ -11,14 +11,16 @@ import javax.validation.constraints.Size;
 public final class Card {
     private Long id;
     private String barcode;
+    private String format;
     private User user;
     private Brand brand;
 
     public Card() {
     }
 
-    public Card(String barcode, User user, Brand brand) {
+    public Card(String barcode, String format, User user, Brand brand) {
         this.barcode = barcode;
+        this.format = format;
         this.user = user;
         this.brand = brand;
     }
@@ -45,6 +47,18 @@ public final class Card {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    @Basic
+    @NotBlank
+    @NotNull
+    @Size(max = 35)
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
     }
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -76,6 +90,7 @@ public final class Card {
         return "Card{" +
                 "id=" + id +
                 ", barcode='" + barcode + '\'' +
+                ", format='" + format + '\'' +
                 ", user=" + user +
                 ", brand=" + brand +
                 '}';
