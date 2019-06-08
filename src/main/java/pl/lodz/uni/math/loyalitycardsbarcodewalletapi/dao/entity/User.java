@@ -6,8 +6,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public final class User {
@@ -87,9 +85,6 @@ public final class User {
         this.active = active;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Card> cards = new ArrayList<>();
-
     @Override
     public String toString() {
         return "User{" +
@@ -98,7 +93,6 @@ public final class User {
                 ", password='" + password + '\'' +
                 ", dateTimeOfLastPasswordChange=" + dateTimeOfLastPasswordChange +
                 ", active=" + active +
-                ", cards=" + cards +
                 '}';
     }
 }

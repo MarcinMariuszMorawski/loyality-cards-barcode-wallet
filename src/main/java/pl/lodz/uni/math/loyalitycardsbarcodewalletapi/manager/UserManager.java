@@ -15,7 +15,6 @@ import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.security.service.JwtUser;
 import pl.lodz.uni.math.loyalitycardsbarcodewalletapi.security.service.JwtUserChangePassword;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -104,6 +103,6 @@ public final class UserManager {
 
     @EventListener(ApplicationReadyEvent.class)
     public void fill() {
-        save(new User("1", "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", Timestamp.valueOf(LocalDateTime.now()), true));
+        // save(new User("1", "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b", Timestamp.valueOf(LocalDateTime.now()), true));
     }
 }

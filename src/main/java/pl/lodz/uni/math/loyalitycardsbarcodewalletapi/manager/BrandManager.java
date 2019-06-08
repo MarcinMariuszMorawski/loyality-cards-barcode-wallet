@@ -23,7 +23,7 @@ public final class BrandManager {
     }
 
     public Iterable<Brand> findAll() {
-        return brandRepo.findAll();
+        return brandRepo.findAllByOrderByName();
     }
 
     public Brand save(Brand brand) {
@@ -36,29 +36,13 @@ public final class BrandManager {
 
     @EventListener(ApplicationReadyEvent.class)
     public void fill() {
-        save(new Brand("Biedronka", "#123563"));
-        save(new Brand("Tesco", "#421356"));
-        save(new Brand("Auchan", "#421356"));
-        save(new Brand("Stokrotka", "#421356"));
-        save(new Brand("Dino", "#421356"));
-        save(new Brand("Vitay", "#421356"));
-        save(new Brand("Payback", "#421356"));
-        save(new Brand("Empik", "#421356"));
-        save(new Brand("CircleK", "#421356"));
-        save(new Brand("Zabka", "#421356"));
-        save(new Brand("Mcdonalds", "#421356"));
-        save(new Brand("Kfc", "#421356"));
-        save(new Brand("Tokyo", "#421356"));
-        save(new Brand("Smyk", "#421356"));
-        save(new Brand("Deichman", "#421356"));
-        save(new Brand("CCC", "#421356"));
-        save(new Brand("Cropp", "#421356"));
-        save(new Brand("House", "#421356"));
-        save(new Brand("H&M", "#421356"));
-        save(new Brand("Sinsay", "#421356"));
-        save(new Brand("Rossmann", "#421356"));
-        save(new Brand("Kasztan", "#421356"));
+        save(new Brand(1L, "Biedronka", "#e5bf16"));
+        save(new Brand(2L, "Tesco", "#1f26ef"));
+        save(new Brand(3L, "Auchan", "#d31d2f"));
+        save(new Brand(4L, "Payback", "#2027db"));
+        save(new Brand(5L, "Empik", "#38383a"));
+        save(new Brand(6L, "Rossmann", "#ad0a15"));
+        save(new Brand(7L, "Orlen", "#ef1726"));
+        save(new Brand(8L, "ClrcleK", "#6b030a"));
     }
-
-
 }
