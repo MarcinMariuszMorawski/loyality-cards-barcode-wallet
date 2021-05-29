@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Loyalty Cards Wallet</string>
+
+    <string name="title_activity_main">Login to loyalty cards wallet</string>
+    <string name="title_activity_wallet">Loyalty cards wallet</string>
+    <string name="title_activity_create_account">Create an account</string>
+    <string name="title_activity_change_password">Change password</string>
+    <string name="title_activity_brands">Choose brand</string>
+    <string name="title_activity_add_card">Add card</string>
+    <string name="title_activity_card">Card</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_header_title">Loyalty cards wallet</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
